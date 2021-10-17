@@ -1,0 +1,76 @@
+PGN {
+    Game = Header Moves result
+    Header
+        = ListOf<
+            (
+                EventTag
+                | SiteTag
+                | DateTag
+                | RoundTag
+                | WhiteTag
+                | BlackTag
+                | ResultTag
+                | OtherTag
+            ),
+            space*
+        >
+
+    Tag<sym, str> = "[" sym str "]"
+
+    EventTag = Tag<"Event", string>
+    SiteTag = Tag<"Site", string>
+    DateTag = Tag<"Date", fstring<date>>
+    RoundTag = Tag<"Round", fstring<roundNums>>
+    WhiteTag = Tag<"White", string>
+    BlackTag = Tag<"Black", string>
+    ResultTag = Tag<"Result", fstring<result>>
+    WhiteElo = Tag<"WhiteElo", fstring<number>>
+    BlackElo = Tag<"BlackElo", fstring<number>>
+    WhiteUSCF = Tag<"WhiteUSCF", fstring<number>>
+    BlackUSCF = Tag<"BlackUSCF", fstring<number>>
+    EventDate = Tag<"EventDate", fstring<date>>
+    Board = Tag<"Board", fstring<number>>
+    Time = Tag<"Time", fstring<time>>
+    UTCTime = Tag<"UTCTime", fstring<time>>
+    UTCDate = Tag<"UTCDate", fstring<date>>
+
+    
+    OtherTag = Tag<symbol, string>
+
+    Rav = "(" FirstRound? Moves ")"
+    Move = san comment? Rav?
+    Round = moveNum Move Move
+    FirstRound = moveNum (Move | "...") Move
+    LastRound = moveNum Move ~Move
+    Moves = ListOf< ~LastRound Round, space*> LastRound?
+
+    string = "\"" ("\\\"" | ~"\"" any)* "\""
+    fstring<format> = "\"" format "\""
+    symbol = alnum (alnum | "_" | "+" | "#" | "=" | ":" | "-")*
+    twoDigitNum = (digit | "?") (digit | "?")
+    fourDigitNum = (digit | "?") (digit | "?") (digit | "?") (digit | "?")
+    number = digit+ | "?" | "-"
+    date = fourDigitNum "." twoDigitNum "." twoDigitNum
+    time = twoDigitNum ":" twoDigitNum ":" twoDigitNum
+    roundNums = "-" | "?" | listOf<number, ".">
+    result = "1-0" | "0-1" | "1/2-1/2" | "*"
+    tagName = (alnum | "_")+
+    file = "a".."h"
+    rank = "1".."8"
+    square = file rank
+    piece = "K" | "Q" | "R" | "N" | "B" | "P"?
+    promotion_piece = "Q" | "R" | "N" | "B"
+    specificMove<p> = p file? rank? "x"? square
+    normalMove<p> = p square
+    promotion = (specificMove<"P"?> | normalMove<"P"?>) "=" promotion_piece
+    castle = "O-O-O" | "O-O"
+    san_suffix = "!!" | "!?" | "?!" | "??" | "!" | "?"
+    moveNum = digit+ "."
+    comment = "{" (~"}" any)* "}"
+    san = (promotion | specificMove<piece> | normalMove<piece> | castle)
+          ("+" | "#")?
+          san_suffix?
+
+    movesTimePair = digit+ "/" digit+
+    suddenDeath = digit+
+}
