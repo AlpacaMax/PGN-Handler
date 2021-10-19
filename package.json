@@ -1,0 +1,23 @@
+{
+  "name": "pgn-handler",
+  "version": "0.0.1",
+  "description": "A PGN file handler with parser, validator, and modifier functions\"",
+  "main": "pgn_parser.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlpacaMax/PGN-Handler.git"
+  },
+  "author": "AlpacaMax",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlpacaMax/PGN-Handler/issues"
+  },
+  "homepage": "https://github.com/AlpacaMax/PGN-Handler#readme",
+  "dependencies": {
+    "chess": "^0.5.0",
+    "ohm-js": "^16.0.0"
+  }
+}
