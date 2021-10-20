@@ -6,6 +6,9 @@ const semantics = g.createSemantics().addOperation('parse', {
     _terminal() {
         return this.sourceString;
     },
+    _iter(...children) {
+        return children.map(c => c.parse());
+    },      
     string(l, str, r) {
         str = str.sourceString;
         return str.replaceAll("\\\\", "\\").replaceAll("\\\"", "\"");
@@ -199,7 +202,7 @@ const semantics = g.createSemantics().addOperation('parse', {
     },
 });
 
-const match = g.match(fs.readFileSync('AlpacaMax_vs_Ruvalcaba0122_2021.04.17.pgn'));
-// const match = g.match('40/9000');
-// console.log(semantics(match).parse());
-console.log(JSON.stringify(semantics(match).parse(), undefined, 2));
+const match = g.match(fs.readFileSync('sample.pgn'));
+const result = semantics(match).parse();
+
+console.log(JSON.stringify(result, undefined, 2));
