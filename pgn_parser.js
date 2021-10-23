@@ -202,7 +202,9 @@ const semantics = g.createSemantics().addOperation('parse', {
     },
 });
 
-const match = g.match(fs.readFileSync('sample.pgn'));
-const result = semantics(match).parse();
+function parse(filename) {
+    let match = g.match(fs.readFileSync(filename));
+    return semantics(match).parse();
+}
 
-console.log(JSON.stringify(result, undefined, 2));
+exports.parse = parse;

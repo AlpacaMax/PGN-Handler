@@ -18,6 +18,7 @@
   "homepage": "https://github.com/AlpacaMax/PGN-Handler#readme",
   "dependencies": {
     "chess": "^0.5.0",
+    "lodash": "^4.17.21",
     "ohm-js": "^16.0.0"
   }
 }
