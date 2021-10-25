@@ -15,7 +15,9 @@ function validate(parsedPgn) {
                 if ("RAV" in turn.white) {
                     _helper(turn.white.RAV, _.cloneDeep(gameClient));
                 }
-                gameClient.move(turn.white.SAN);
+                let m = gameClient.move(turn.white.SAN);
+                turn.white.From.File = m.move.prevSquare.file;
+                turn.white.From.Rank = m.move.prevSquare.rank;
             }
 
             // Validation for black move
@@ -29,7 +31,10 @@ function validate(parsedPgn) {
                 if ("RAV" in turn.black) {
                     _helper(turn.black.RAV, _.cloneDeep(gameClient));
                 }
-                gameClient.move(turn.black.SAN);
+                // console.log(turn.black.SAN);
+                let m = gameClient.move(turn.black.SAN);
+                turn.black.From.File = m.move.prevSquare.file;
+                turn.black.From.Rank = m.move.prevSquare.rank;
             }
         }
     }
