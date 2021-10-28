@@ -86,7 +86,7 @@ const semantics = g.createSemantics().addOperation('parse', {
         takes = takes.parse();
 
         return {
-            type: takes.length===0 ? 0b0 : 0b1,
+            type: takes.length===0 ? 0b1 : 0b10,
             piece: piece.parse(),
             from: {
                 file: startFile.length===0 ? null : startFile[0],
@@ -97,7 +97,7 @@ const semantics = g.createSemantics().addOperation('parse', {
     },
     promotion(move, equals, piece) {
         const result = move.parse();
-        result.type |= 0b10;
+        result.type |= 0b10000;
         result.promotion = piece.parse();
         return result;
     },
