@@ -34,16 +34,16 @@ const semantics = g.createSemantics().addOperation('parse', {
     },
     date(year, a, month, b, day) {
         return {
-            Year: year.parse(),
-            Month: month.parse(),
-            Day: day.parse(),
+            year: year.parse(),
+            month: month.parse(),
+            day: day.parse(),
         };
     },
     time(hour, a, minute, b, second) {
         return {
-            Hour: hour.parse(),
-            Minute: minute.parse(),
-            Second: second.parse(),
+            hour: hour.parse(),
+            minute: minute.parse(),
+            second: second.parse(),
         };
     },
     roundNums(list) {
@@ -60,8 +60,8 @@ const semantics = g.createSemantics().addOperation('parse', {
     },
     square(file, rank) {
         return {
-            File: file.sourceString,
-            Rank: rank.sourceString
+            file: file.sourceString,
+            rank: rank.sourceString
         };
     },
     piece(p) {
@@ -72,12 +72,12 @@ const semantics = g.createSemantics().addOperation('parse', {
         return {
             // mate, check,long_castle, short_castle, promotion, takes
             type: 0b0,
-            Piece: piece.parse(),
-            From: {
-                File: null,
-                Rank: null,
+            piece: piece.parse(),
+            from: {
+                file: null,
+                rank: null,
             },
-            To: destSquare.parse(),
+            to: destSquare.parse(),
         };
     },
     specificMove(piece, startFile, startRank, takes, destSquare) {
@@ -87,18 +87,18 @@ const semantics = g.createSemantics().addOperation('parse', {
 
         return {
             type: takes.length===0 ? 0b0 : 0b1,
-            Piece: piece.parse(),
-            From: {
-                File: startFile.length===0 ? null : startFile[0],
-                Rank: startRank.length===0 ? null : startRank[0],
+            piece: piece.parse(),
+            from: {
+                file: startFile.length===0 ? null : startFile[0],
+                rank: startRank.length===0 ? null : startRank[0],
             },
-            To: destSquare.parse(),
+            to: destSquare.parse(),
         };
     },
     promotion(move, equals, piece) {
         const result = move.parse();
         result.type |= 0b10;
-        result.Promotion = piece.parse();
+        result.promotion = piece.parse();
         return result;
     },
     castle(move) {
@@ -123,24 +123,24 @@ const semantics = g.createSemantics().addOperation('parse', {
             moveParsed.type |= 0b100000;
         }
 
-        moveParsed.SuffixParsed = suffixParsed.length===0 ? null : suffixParsed[0];
-        moveParsed.SAN = this.sourceString;
+        moveParsed.suffixParsed = suffixParsed.length===0 ? null : suffixParsed[0];
+        moveParsed.san = this.sourceString;
 
         return moveParsed;
     },
     movesTimePair(numMoves, _, time) {
         return {
-            NumMoves: parseInt(numMoves.sourceString, 10),
-            Time: parseInt(time.sourceString, 10),
+            numMoves: parseInt(numMoves.sourceString, 10),
+            time: parseInt(time.sourceString, 10),
         };
     },
     Header(list) {
         return {
-            Header: Object.fromEntries(list.asIteration().parse())
+            header: Object.fromEntries(list.asIteration().parse())
         };
     },
     Tag(l, sym, str, r) {
-        const tag = sym.parse();
+        const tag = sym.parse().toLowerCase();
         const content = str.parse();
         return [tag, content==='?' || content=='-' ? null : content];
     },
@@ -159,8 +159,8 @@ const semantics = g.createSemantics().addOperation('parse', {
         const commentParsed = comment.parse();
         const ravParsed = rav.parse();
 
-        if (commentParsed.length > 0) sanParsed.Comment = commentParsed[0];
-        if (ravParsed.length > 0) sanParsed.RAV = ravParsed[0];
+        if (commentParsed.length > 0) sanParsed.comment = commentParsed[0];
+        if (ravParsed.length > 0) sanParsed.rav = ravParsed[0];
 
         return sanParsed;
     },
@@ -197,7 +197,7 @@ const semantics = g.createSemantics().addOperation('parse', {
     Game(header, moves, result) {
         return {
             ...header.parse(),
-            Moves: moves.parse(),
+            moves: moves.parse(),
         };
     },
 });

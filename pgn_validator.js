@@ -9,34 +9,34 @@ function validate(parsedPgn) {
             // Validation for white move
             if (turn.white != null) {
                 let movesForWhite = chess.moves();
-                if (!movesForWhite.includes(turn.white.SAN)) {
-                    turn.white.LegalMove = false;
+                if (!movesForWhite.includes(turn.white.san)) {
+                    turn.white.legalMove = false;
                     break;
                 }
-                turn.white.LegalMove = true;
+                turn.white.legalMove = true;
                 if ("RAV" in turn.white) {
                     _helper(turn.white.RAV, chess);
                 }
-                let m = chess.move(turn.white.SAN);
-                turn.white.From.File = m.from[0];
-                turn.white.From.Rank = m.from[1];
+                let m = chess.move(turn.white.san);
+                turn.white.from.file = m.from[0];
+                turn.white.from.rank = m.from[1];
                 ++numOfHalfMoves;
             }
 
             // Validation for black move
             if (turn.black != null) {
                 let movesForBlack = chess.moves();
-                if (!movesForBlack.includes(turn.black.SAN)) {
-                    turn.black.LegalMove = false;
+                if (!movesForBlack.includes(turn.black.san)) {
+                    turn.black.legalMove = false;
                     break;
                 }
-                turn.black.LegalMove = true;
+                turn.black.legalMove = true;
                 if ("RAV" in turn.black) {
                     _helper(turn.black.RAV, chess);
                 }
-                let m = chess.move(turn.black.SAN);
-                turn.black.From.File = m.from[0];
-                turn.black.From.Rank = m.from[1];
+                let m = chess.move(turn.black.san);
+                turn.black.from.file = m.from[0];
+                turn.black.from.rank = m.from[1];
                 ++numOfHalfMoves;
             }
         }
@@ -47,7 +47,7 @@ function validate(parsedPgn) {
     }
 
     const chess = new Chess();
-    _helper(parsedPgn.Moves, chess);
+    _helper(parsedPgn.moves, chess);
 }
 
 exports.validate = validate;
