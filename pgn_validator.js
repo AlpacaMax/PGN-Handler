@@ -18,8 +18,10 @@ function validate(parsedPgn) {
                     _helper(turn.white.RAV, chess);
                 }
                 let m = chess.move(turn.white.san);
-                turn.white.from.file = m.from[0];
-                turn.white.from.rank = m.from[1];
+                if (turn.white.type & 0b1100 == 0) { // If it's not castle
+                    turn.white.from.file = m.from[0];
+                    turn.white.from.rank = m.from[1];
+                }
                 ++numOfHalfMoves;
             }
 
@@ -35,8 +37,10 @@ function validate(parsedPgn) {
                     _helper(turn.black.RAV, chess);
                 }
                 let m = chess.move(turn.black.san);
-                turn.black.from.file = m.from[0];
-                turn.black.from.rank = m.from[1];
+                if (turn.black.type & 0b1100 == 0) {
+                    turn.black.from.file = m.from[0];
+                    turn.black.from.rank = m.from[1];
+                }
                 ++numOfHalfMoves;
             }
         }

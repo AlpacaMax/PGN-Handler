@@ -97,7 +97,7 @@ const semantics = g.createSemantics().addOperation('parse', {
     },
     promotion(move, equals, piece) {
         const result = move.parse();
-        result.type = 0b10000;
+        result.type |= 0b10000;
         result.promotion = piece.parse();
         return result;
     },
@@ -118,9 +118,9 @@ const semantics = g.createSemantics().addOperation('parse', {
         const suffixParsed = suffix.parse();
 
         if (checkOrMateParsed[0] === "+") {
-            moveParsed.type = 0b100000;
+            moveParsed.type |= 0b100000;
         } else if (checkOrMateParsed[0] === "#") {
-            moveParsed.type = 0b1000000;
+            moveParsed.type |= 0b1000000;
         }
 
         moveParsed.suffixParsed = suffixParsed.length===0 ? null : suffixParsed[0];
