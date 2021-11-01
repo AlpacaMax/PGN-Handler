@@ -2,6 +2,14 @@ const fs = require('fs');
 const ohm = require('ohm-js');
 const g = ohm.grammar(fs.readFileSync('pgn_grammar.ohm'));
 
+const NORMAL        = 0b1
+const CAPTURE       = 0b10
+const SHORTCASTLE   = 0b100
+const LONGCASTLE    = 0b1000
+const PROMOTION     = 0b10000
+const CHECK         = 0b100000
+const CHECKMATE     = 0b1000000
+
 const semantics = g.createSemantics().addOperation('parse', {
     _terminal() {
         return this.sourceString;
@@ -71,7 +79,7 @@ const semantics = g.createSemantics().addOperation('parse', {
     normalMove(piece, destSquare) {
         return {
             // mate, check, promotion, long_castle, short_castle, takes, normal
-            type: 0b1,
+            type: NORMAL,
             piece: piece.parse(),
             from: {
                 file: null,
@@ -86,7 +94,7 @@ const semantics = g.createSemantics().addOperation('parse', {
         takes = takes.parse();
 
         return {
-            type: takes.length===0 ? 0b1 : 0b10,
+            type: takes.length===0 ? NORMAL : NORMAL | CAPTURE,
             piece: piece.parse(),
             from: {
                 file: startFile.length===0 ? null : startFile[0],
@@ -97,13 +105,13 @@ const semantics = g.createSemantics().addOperation('parse', {
     },
     promotion(move, equals, piece) {
         const result = move.parse();
-        result.type |= 0b10000;
+        result.type |= PROMOTION;
         result.promotion = piece.parse();
         return result;
     },
     castle(move) {
         return {
-            type: move.parse()==="O-O" ? 0b100 : 0b1000
+            type: move.parse()==="O-O" ? SHORTCASTLE : LONGCASTLE
         };
     },
     moveNum(num, dot) {
@@ -118,9 +126,9 @@ const semantics = g.createSemantics().addOperation('parse', {
         const suffixParsed = suffix.parse();
 
         if (checkOrMateParsed[0] === "+") {
-            moveParsed.type |= 0b100000;
+            moveParsed.type |= CHECK;
         } else if (checkOrMateParsed[0] === "#") {
-            moveParsed.type |= 0b1000000;
+            moveParsed.type |= CHECKMATE;
         }
 
         moveParsed.suffixParsed = suffixParsed.length===0 ? null : suffixParsed[0];
