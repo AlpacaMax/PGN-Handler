@@ -1,4 +1,4 @@
 /node_modules
-*.pgn
+/*.pgn
 test.js
 parsedPgn.txt
