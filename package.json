@@ -4,7 +4,7 @@
   "description": "A PGN file handler with parser, validator, and modifier functions\"",
   "main": "pgn_parser.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -20,5 +20,8 @@
     "chess.js": "^0.12.0",
     "lodash": "^4.17.21",
     "ohm-js": "^16.0.0"
+  },
+  "devDependencies": {
+    "jest": "^27.3.1"
   }
 }
