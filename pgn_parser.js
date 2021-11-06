@@ -210,9 +210,18 @@ const semantics = g.createSemantics().addOperation('parse', {
     },
 });
 
-function parse(filename) {
+function parseRaw(filename) {
     let match = g.match(fs.readFileSync(filename));
     return semantics(match).parse();
 }
 
-exports.parse = parse;
+exports.parseRaw = parseRaw;
+exports.moveTypes = {
+    NORMAL,
+    CAPTURE,
+    SHORTCASTLE,
+    LONGCASTLE,
+    PROMOTION,
+    CHECK,
+    CHECKMATE,
+};

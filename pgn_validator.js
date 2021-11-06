@@ -1,5 +1,5 @@
 const { Chess } = require('chess.js');
-const _ = require('lodash');
+const { _, moveTypes } = require('./pgn_parser');
 
 function validate(parsedPgn) {
     function _helper(moves, chess) {
@@ -18,7 +18,11 @@ function validate(parsedPgn) {
                     _helper(turn.white.rav, chess);
                 }
                 let m = chess.move(turn.white.san);
-                if (turn.white.type & 0b1100 == 0) { // If it's not castle
+                if (
+                    turn.white.type
+                    & (moveTypes.SHORTCASTLE | moveTypes.LONGCASTLE)
+                    == 0
+                ) { // If it's not castle
                     turn.white.from.file = m.from[0];
                     turn.white.from.rank = m.from[1];
                 }
@@ -37,7 +41,11 @@ function validate(parsedPgn) {
                     _helper(turn.black.rav, chess);
                 }
                 let m = chess.move(turn.black.san);
-                if (turn.black.type & 0b1100 == 0) {
+                if (
+                    turn.black.type
+                    & (moveTypes.SHORTCASTLE | moveTypes.LONGCASTLE)
+                    == 0
+                ) {
                     turn.black.from.file = m.from[0];
                     turn.black.from.rank = m.from[1];
                 }
