@@ -14,8 +14,8 @@ function validate(parsedPgn) {
                     break;
                 }
                 turn.white.legalMove = true;
-                if ("RAV" in turn.white) {
-                    _helper(turn.white.RAV, chess);
+                if ("rav" in turn.white) {
+                    _helper(turn.white.rav, chess);
                 }
                 let m = chess.move(turn.white.san);
                 if (turn.white.type & 0b1100 == 0) { // If it's not castle
@@ -33,8 +33,8 @@ function validate(parsedPgn) {
                     break;
                 }
                 turn.black.legalMove = true;
-                if ("RAV" in turn.black) {
-                    _helper(turn.black.RAV, chess);
+                if ("rav" in turn.black) {
+                    _helper(turn.black.rav, chess);
                 }
                 let m = chess.move(turn.black.san);
                 if (turn.black.type & 0b1100 == 0) {

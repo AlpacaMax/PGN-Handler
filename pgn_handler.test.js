@@ -6,6 +6,6 @@ test('Test legal move validation', () => {
     validator.validate(parsedPgn);
     expect(parsedPgn.moves[0].white.legalMove).toBeTruthy();
     expect(parsedPgn.moves[0].black.legalMove).toBeTruthy();
-    expect(parsedPgn.moves[0].black.rav.black.legalMove).toBeFalsy();
+    expect(parsedPgn.moves[0].black.rav[0].black.legalMove).toBeFalsy();
     expect(parsedPgn.moves[1].white.legalMove).toBeTruthy();
 });
