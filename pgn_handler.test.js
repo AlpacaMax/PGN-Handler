@@ -1,5 +1,6 @@
 const parser = require('./pgn_parser');
 const validator = require('./pgn_validator');
+const filler = require('./pgn_fillers');
 
 test('Test legal move validation', () => {
   const parsedPgn = parser.parseRaw('test_pgns/test_legal_moves.pgn');
@@ -32,5 +33,22 @@ test('Test move types', () => {
   );
   expect(parsedPgn.moves[3].white.type).toBe(
       parser.moveTypes.NORMAL | parser.moveTypes.CHECKMATE,
+  );
+});
+
+test('Test fillFEN function', () => {
+  const parsedPgn = parser.parseRaw('test_pgns/test_legal_moves.pgn');
+  validator.validate(parsedPgn);
+  filler.fillFEN(parsedPgn);
+
+  expect(parsedPgn.moves[0].white.fen).toBe(
+      'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1',
+  );
+  expect(parsedPgn.moves[0].black.fen).toBe(
+      'rnbqkbnr/pppp1ppp/8/4p3/4P3/8/PPPP1PPP/RNBQKBNR w KQkq e6 0 2',
+  );
+  expect(parsedPgn.moves[0].black.rav[0].black.fen).toBeUndefined();
+  expect(parsedPgn.moves[1].white.fen).toBe(
+      'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2',
   );
 });
