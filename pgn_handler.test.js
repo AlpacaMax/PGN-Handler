@@ -1,6 +1,6 @@
 const parser = require('./pgn_parser');
 const validator = require('./pgn_validator');
-const filler = require('./pgn_fillers');
+const modifier = require('./pgn_modifiers');
 
 test('Test legal move validation', () => {
   const parsedPgn = parser.parseRaw('test_pgns/test_legal_moves.pgn');
@@ -39,7 +39,7 @@ test('Test move types', () => {
 test('Test fillFEN function', () => {
   const parsedPgn = parser.parseRaw('test_pgns/test_legal_moves.pgn');
   validator.validate(parsedPgn);
-  filler.fillFEN(parsedPgn);
+  modifier.fillFEN(parsedPgn);
 
   expect(parsedPgn.moves[0].white.fen).toBe(
       'rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR b KQkq e3 0 1',
