@@ -1,5 +1,4 @@
 const {Chess} = require('chess.js');
-const moveTypes = require('./pgn_parser').moveTypes;
 
 function validate(parsedPgn) {
   function _helper(moves, chess) {
@@ -18,14 +17,7 @@ function validate(parsedPgn) {
           _helper(turn.white.rav, chess);
         }
         const m = chess.move(turn.white.san);
-        if (
-          turn.white.type &
-                    (moveTypes.SHORTCASTLE | moveTypes.LONGCASTLE) ==
-                    0
-        ) { // If it's not castle
-          turn.white.from.file = m.from[0];
-          turn.white.from.rank = m.from[1];
-        }
+        
         ++numOfHalfMoves;
       }
 
@@ -41,14 +33,7 @@ function validate(parsedPgn) {
           _helper(turn.black.rav, chess);
         }
         const m = chess.move(turn.black.san);
-        if (
-          turn.black.type &
-                    (moveTypes.SHORTCASTLE | moveTypes.LONGCASTLE) ==
-                    0
-        ) {
-          turn.black.from.file = m.from[0];
-          turn.black.from.rank = m.from[1];
-        }
+        
         ++numOfHalfMoves;
       }
     }
