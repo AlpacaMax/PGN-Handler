@@ -16,8 +16,8 @@ function validate(parsedPgn) {
         if ('rav' in turn.white) {
           _helper(turn.white.rav, chess);
         }
-        const m = chess.move(turn.white.san);
-        
+
+        chess.move(turn.white.san);
         ++numOfHalfMoves;
       }
 
@@ -32,8 +32,8 @@ function validate(parsedPgn) {
         if ('rav' in turn.black) {
           _helper(turn.black.rav, chess);
         }
-        const m = chess.move(turn.black.san);
-        
+
+        chess.move(turn.black.san);
         ++numOfHalfMoves;
       }
     }

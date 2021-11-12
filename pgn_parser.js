@@ -88,7 +88,8 @@ const semantics = g.createSemantics().addOperation('parse', {
     takes = takes.parse();
 
     return {
-      type: takes.length === 0 ? moveTypes.NORMAL : moveTypes.NORMAL | moveTypes.CAPTURE,
+      type: takes.length === 0 ?
+            moveTypes.NORMAL : moveTypes.NORMAL | moveTypes.CAPTURE,
       piece: piece.parse(),
       from: {
         file: startFile.length === 0 ? null : startFile[0],
@@ -105,7 +106,8 @@ const semantics = g.createSemantics().addOperation('parse', {
   },
   castle(move) {
     return {
-      type: move.parse() === 'O-O' ? moveTypes.SHORTCASTLE : moveTypes.LONGCASTLE,
+      type: move.parse() === 'O-O' ?
+            moveTypes.SHORTCASTLE : moveTypes.LONGCASTLE,
     };
   },
   moveNum(num, dot) {
