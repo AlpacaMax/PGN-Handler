@@ -1,15 +1,8 @@
 const fs = require('fs');
 const ohm = require('ohm-js');
+const {moveTypes} = require('./config');
 
 const g = ohm.grammar(fs.readFileSync('pgn_grammar.ohm'));
-
-const NORMAL = 0b1;
-const CAPTURE = 0b10;
-const SHORTCASTLE = 0b100;
-const LONGCASTLE = 0b1000;
-const PROMOTION = 0b10000;
-const CHECK = 0b100000;
-const CHECKMATE = 0b1000000;
 
 const semantics = g.createSemantics().addOperation('parse', {
   _terminal() {
@@ -80,7 +73,7 @@ const semantics = g.createSemantics().addOperation('parse', {
   normalMove(piece, destSquare) {
     return {
       // mate, check, promotion, long_castle, short_castle, takes, normal
-      type: NORMAL,
+      type: moveTypes.NORMAL,
       piece: piece.parse(),
       from: {
         file: null,
@@ -95,7 +88,7 @@ const semantics = g.createSemantics().addOperation('parse', {
     takes = takes.parse();
 
     return {
-      type: takes.length === 0 ? NORMAL : NORMAL | CAPTURE,
+      type: takes.length === 0 ? moveTypes.NORMAL : moveTypes.NORMAL | moveTypes.CAPTURE,
       piece: piece.parse(),
       from: {
         file: startFile.length === 0 ? null : startFile[0],
@@ -106,13 +99,13 @@ const semantics = g.createSemantics().addOperation('parse', {
   },
   promotion(move, equals, piece) {
     const result = move.parse();
-    result.type |= PROMOTION;
+    result.type |= moveTypes.PROMOTION;
     result.promotion = piece.parse();
     return result;
   },
   castle(move) {
     return {
-      type: move.parse() === 'O-O' ? SHORTCASTLE : LONGCASTLE,
+      type: move.parse() === 'O-O' ? moveTypes.SHORTCASTLE : moveTypes.LONGCASTLE,
     };
   },
   moveNum(num, dot) {
@@ -127,9 +120,9 @@ const semantics = g.createSemantics().addOperation('parse', {
     const suffixParsed = suffix.parse();
 
     if (checkOrMateParsed[0] === '+') {
-      moveParsed.type |= CHECK;
+      moveParsed.type |= moveTypes.CHECK;
     } else if (checkOrMateParsed[0] === '#') {
-      moveParsed.type |= CHECKMATE;
+      moveParsed.type |= moveTypes.CHECKMATE;
     }
 
     moveParsed.suffixParsed = suffixParsed.length === 0 ?
@@ -218,12 +211,3 @@ function parseRaw(filename) {
 }
 
 exports.parseRaw = parseRaw;
-exports.moveTypes = {
-  NORMAL,
-  CAPTURE,
-  SHORTCASTLE,
-  LONGCASTLE,
-  PROMOTION,
-  CHECK,
-  CHECKMATE,
-};

@@ -1,6 +1,7 @@
 const parser = require('./pgn_parser');
 const validator = require('./pgn_validator');
 const modifier = require('./pgn_modifiers');
+const {moveTypes} = require('./config');
 
 test('Test legal move validation', () => {
   const parsedPgn = parser.parseRaw('test_pgns/test_legal_moves.pgn');
@@ -14,25 +15,25 @@ test('Test legal move validation', () => {
 test('Test move types', () => {
   const parsedPgn = parser.parseRaw('test_pgns/test_move_type.pgn');
   expect(parsedPgn.moves[0].white.type).toBe(
-      parser.moveTypes.NORMAL,
+      moveTypes.NORMAL,
   );
   expect(parsedPgn.moves[0].black.type).toBe(
-      parser.moveTypes.NORMAL | parser.moveTypes.CAPTURE,
+      moveTypes.NORMAL | moveTypes.CAPTURE,
   );
   expect(parsedPgn.moves[1].white.type).toBe(
-      parser.moveTypes.SHORTCASTLE,
+      moveTypes.SHORTCASTLE,
   );
   expect(parsedPgn.moves[1].black.type).toBe(
-      parser.moveTypes.LONGCASTLE,
+      moveTypes.LONGCASTLE,
   );
   expect(parsedPgn.moves[2].white.type).toBe(
-      parser.moveTypes.NORMAL | parser.moveTypes.PROMOTION,
+      moveTypes.NORMAL | moveTypes.PROMOTION,
   );
   expect(parsedPgn.moves[2].black.type).toBe(
-      parser.moveTypes.NORMAL | parser.moveTypes.CHECK,
+      moveTypes.NORMAL | moveTypes.CHECK,
   );
   expect(parsedPgn.moves[3].white.type).toBe(
-      parser.moveTypes.NORMAL | parser.moveTypes.CHECKMATE,
+      moveTypes.NORMAL | moveTypes.CHECKMATE,
   );
 });
 

@@ -1,5 +1,5 @@
 const {Chess} = require('chess.js');
-const moveTypes = require('./pgn_parser').moveTypes;
+const {moveTypes} = require('./config');
 
 function fillStartPosition(parsedPgn) {
   function _helper(moves, chess) {
