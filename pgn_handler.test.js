@@ -2,6 +2,7 @@ const parser = require('./pgn_parser');
 const validator = require('./pgn_validator');
 const modifier = require('./pgn_modifiers');
 const {moveTypes} = require('./config');
+const {squareToPos} = require('./util');
 
 test('Test legal move validation', () => {
   const parsedPgn = parser.parseRaw('test_pgns/test_legal_moves.pgn');
@@ -52,4 +53,12 @@ test('Test fillFEN function', () => {
   expect(parsedPgn.moves[1].white.fen).toBe(
       'rnbqkbnr/pppp1ppp/8/4p3/4P3/5N2/PPPP1PPP/RNBQKB1R b KQkq - 1 2',
   );
+});
+
+test('Test squareToPos function', () => {
+  expect(squareToPos({file: 'a', rank: '1'})).toEqual([7, 0]);
+  expect(squareToPos({file: 'a', rank: '8'})).toEqual([0, 0]);
+  expect(squareToPos({file: 'h', rank: '1'})).toEqual([7, 7]);
+  expect(squareToPos({file: 'h', rank: '8'})).toEqual([0, 7]);
+  expect(squareToPos({file: 'e', rank: '4'})).toEqual([4, 4]);
 });
