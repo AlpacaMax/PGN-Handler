@@ -1,6 +1,6 @@
 const fs = require('fs');
 const ohm = require('ohm-js');
-const {moveTypes} = require('./config');
+const {moveTypes, results} = require('./config');
 
 const g = ohm.grammar(fs.readFileSync('pgn_grammar.ohm'));
 
@@ -53,12 +53,7 @@ const semantics = g.createSemantics().addOperation('parse', {
       null : list.asIteration().parse();
   },
   result(r) {
-    switch (r.sourceString) {
-      case '1-0': return 'White wins';
-      case '0-1': return 'Black wins';
-      case '1/2-1/2': return 'Draw';
-      case '*': return null;
-    }
+    return results[r.sourceString];
   },
   square(file, rank) {
     return {
