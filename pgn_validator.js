@@ -38,13 +38,27 @@ function validate(parsedPgn) {
       }
     }
 
+    let result = 'Unfinished';
+    if (chess.in_draw()) {
+      result = 'Draw';
+    } else if (chess.in_checkmate()) {
+      const lastMovedSide = chess.history[chess.history.legnth-1].color;
+      if (lastMovedSide == 'w') {
+        result = 'White wins';
+      } else {
+        result = 'Black wins';
+      }
+    }
+
     for (let i = 0; i < numOfHalfMoves; ++i) {
       chess.undo();
     }
+
+    return result;
   }
 
   const chess = new Chess();
-  _helper(parsedPgn.moves, chess);
+  console.log(_helper(parsedPgn.moves, chess));
 }
 
 exports.validate = validate;
