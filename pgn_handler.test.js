@@ -62,3 +62,19 @@ test('Test squareToPos function', () => {
   expect(squareToPos({file: 'h', rank: '8'})).toEqual([0, 7]);
   expect(squareToPos({file: 'e', rank: '4'})).toEqual([4, 4]);
 });
+
+test('Test result on board', () => {
+  const unfinished = parser.parseRaw('test_pgns/test_legal_moves.pgn');
+  const draw = parser.parseRaw('test_pgns/test_draw.pgn');
+  const whiteWin = parser.parseRaw('test_pgns/test_white_win.pgn');
+  const blackWin = parser.parseRaw('test_pgns/test_black_win.pgn');
+  validator.validate(unfinished);
+  validator.validate(draw);
+  validator.validate(whiteWin);
+  validator.validate(blackWin);
+
+  expect(unfinished.resultOnBoard).toBe("Unfinished");
+  expect(draw.resultOnBoard).toBe("Draw");
+  expect(whiteWin.resultOnBoard).toBe("White wins");
+  expect(blackWin.resultOnBoard).toBe("Black wins");
+});

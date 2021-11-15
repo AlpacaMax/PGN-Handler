@@ -1,0 +1,21 @@
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2021.10.10"]
+[Round "?"]
+[White "damminhtunglam1a2"]
+[Black "AlpacaMax"]
+[Result "0-1"]
+[ECO "B50"]
+[WhiteElo "875"]
+[BlackElo "869"]
+[TimeControl "900+10"]
+[EndTime "21:48:40 PDT"]
+[Termination "AlpacaMax won by checkmate"]
+
+1. e4 c5 2. Nf3 d6 3. Nc3 Nf6 4. Bc4 Nc6 5. d3 g6 6. Bg5 Bg7 7. Bxf6 Bxf6 8. Nd5
+Bg7 9. O-O e6 10. Nc3 O-O 11. Re1 a6 12. Qd2 b5 13. Bb3 Rb8 14. a3 a5 15. a4 Nd4
+16. Nxd4 cxd4 17. Nxb5 Ba6 18. Nxd4 Bxd4 19. c3 Bg7 20. Qc2 Qg5 21. g3 Qd8 22.
+d4 Qb6 23. Ra3 Rfe8 24. e5 d5 25. c4 Bxc4 26. Bxc4 dxc4 27. Qxc4 Qxb2 28. Raa1
+Rec8 29. Qa6 Rc2 30. Rab1 Qxb1 31. Rxb1 Rxb1+ 32. Kg2 Rbb2 33. Qa8+ Bf8 34. Qxa5
+Rxf2+ 35. Kh3 Rxh2+ 36. Kg4 h5+ 37. Kf4 Rbe2 38. Qb5 Rhf2+ 39. Kg5 Rf5+ 40. Kh4
+Rh2# 0-1

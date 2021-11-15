@@ -42,8 +42,7 @@ function validate(parsedPgn) {
     if (chess.in_draw()) {
       result = 'Draw';
     } else if (chess.in_checkmate()) {
-      const lastMovedSide = chess.history[chess.history.legnth-1].color;
-      if (lastMovedSide == 'w') {
+      if (chess.history().length & 1 != 0) {
         result = 'White wins';
       } else {
         result = 'Black wins';
@@ -58,7 +57,7 @@ function validate(parsedPgn) {
   }
 
   const chess = new Chess();
-  console.log(_helper(parsedPgn.moves, chess));
+  parsedPgn.resultOnBoard = _helper(parsedPgn.moves, chess);
 }
 
 exports.validate = validate;
