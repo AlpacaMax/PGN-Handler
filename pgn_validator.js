@@ -59,6 +59,19 @@ function validate(parsedPgn) {
 
   const chess = new Chess();
   parsedPgn.resultOnBoard = _helper(parsedPgn.moves, chess);
+
+  if (
+    parsedPgn.header.result == undefined ||
+    (
+      parsedPgn.header.result != parsedPgn.resultOnBoard &&
+      (
+        parsedPgn.header.result != results['1/2-1/2'] ||
+        parsedPgn.resultOnBoard != results['*']
+      )
+    )
+  ) {
+    parsedPgn.header.result = parsedPgn.resultOnBoard;
+  }
 }
 
 exports.validate = validate;
