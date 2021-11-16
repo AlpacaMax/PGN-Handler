@@ -1,4 +1,5 @@
 const {Chess} = require('chess.js');
+const {results} = require('./config');
 
 function validate(parsedPgn) {
   function _helper(moves, chess) {
@@ -38,14 +39,14 @@ function validate(parsedPgn) {
       }
     }
 
-    let result = 'Unfinished';
+    let result = results['*'];
     if (chess.in_draw()) {
-      result = 'Draw';
+      result = results['1/2-1/2'];
     } else if (chess.in_checkmate()) {
       if (chess.history().length & 1 != 0) {
-        result = 'White wins';
+        result = results['1-0'];
       } else {
-        result = 'Black wins';
+        result = results['0-1'];
       }
     }
 

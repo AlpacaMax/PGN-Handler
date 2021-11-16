@@ -1,7 +1,7 @@
 const parser = require('./pgn_parser');
 const validator = require('./pgn_validator');
 const modifier = require('./pgn_modifiers');
-const {moveTypes} = require('./config');
+const {moveTypes, results} = require('./config');
 const {squareToPos} = require('./util');
 
 test('Test legal move validation', () => {
@@ -73,8 +73,8 @@ test('Test result on board', () => {
   validator.validate(whiteWin);
   validator.validate(blackWin);
 
-  expect(unfinished.resultOnBoard).toBe("Unfinished");
-  expect(draw.resultOnBoard).toBe("Draw");
-  expect(whiteWin.resultOnBoard).toBe("White wins");
-  expect(blackWin.resultOnBoard).toBe("Black wins");
+  expect(unfinished.resultOnBoard).toBe(results['*']);
+  expect(draw.resultOnBoard).toBe(results['1/2-1/2']);
+  expect(whiteWin.resultOnBoard).toBe(results['1-0']);
+  expect(blackWin.resultOnBoard).toBe(results['0-1']);
 });

@@ -11,5 +11,5 @@ exports.results = {
   '1-0': 'White wins',
   '0-1': 'Black wins',
   '1/2-1/2': 'Draw',
-  '*': 'Ufinished',
+  '*': 'Unfinished',
 };
