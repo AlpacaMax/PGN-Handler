@@ -1,0 +1,22 @@
+[Event "Live Chess"]
+[Site "Chess.com"]
+[Date "2021.04.17"]
+[Round "?"]
+[White "AlpacaMax"]
+[Black "Ruvalcaba0122"]
+[ECO "C21"]
+[WhiteElo "823"]
+[BlackElo "740"]
+[TimeControl "900+10"]
+[EndTime "13:01:35 PDT"]
+[Termination "AlpacaMax won by checkmate"]
+
+1. e4 e5 2. d4 exd4 3. c3 Nc6 4. Nf3 Bc5 5. cxd4 Nxd4 6. Nxd4 Bxd4 7. Qxd4 f6 8.
+Bc4 Ne7 9. Nc3 d6 10. Nd5 Be6 11. Bb5+ Nc6 12. Bxc6+ bxc6 13. Nf4 c5 14. Qa4+
+Qd7 15. Qxd7+ Bxd7 16. O-O g5 17. Nd5 c6 18. Nc7+ Ke7 19. Nxa8 Rxa8 20. Re1 d5
+21. Be3 dxe4 22. Bxc5+ Kf7 23. Rxe4 Re8 24. Rxe8 Bxe8 25. Re1 a5 26. Re7+ Kf8
+27. Rxh7+ Kg8 28. Ra7 f5 29. Ra8 Kf7 30. Rxa5 f4 31. Ra8 g4 32. Rxe8 Kxe8 33. a4
+Kd7 34. a5 Kc7 35. f3 g3 36. h3 Kb7 37. h4 Ka6 38. h5 Kxa5 39. h6 Kb5 40. h7
+Kxc5 41. h8=Q Kb5 42. Qe5+ c5 43. Qxf4 c4 44. Qxg3 Kb4 45. Qb8+ Kc5 46. g4 Kd4
+47. g5 Kd3 48. g6 Kc2 49. g7 c3 50. bxc3 Kxc3 51. g8=Q Kd2 52. Qge8 Kd3 53. Qd6+
+Kc4 54. Qc8+ Kb5 55. Qdb8+ Ka5 56. Qc5+ Ka6 57. Qa3# 1-0

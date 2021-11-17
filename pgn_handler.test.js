@@ -78,3 +78,28 @@ test('Test result on board', () => {
   expect(whiteWin.resultOnBoard).toBe(results['1-0']);
   expect(blackWin.resultOnBoard).toBe(results['0-1']);
 });
+
+test('Test result correction', () => {
+  const unfinished = parser.parseRaw(
+      'test_pgns/test_unfinished_result_correction.pgn',
+  );
+  const draw = parser.parseRaw(
+      'test_pgns/test_draw_result_correction.pgn',
+  );
+  const win = parser.parseRaw(
+      'test_pgns/test_win_result_correction.pgn',
+  );
+  const incorrectResult = parser.parseRaw(
+      'test_pgns/test_incorrect_result.pgn',
+  );
+
+  validator.validate(unfinished);
+  validator.validate(draw);
+  validator.validate(win);
+  validator.validate(incorrectResult);
+
+  expect(unfinished.header.result).toBe(results['*']);
+  expect(draw.header.result).toBe(results['1/2-1/2']);
+  expect(win.header.result).toBe(results['1-0']);
+  expect(incorrectResult.header.result).toBe(results['1/2-1/2']);
+});
