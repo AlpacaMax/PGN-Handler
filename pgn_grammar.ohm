@@ -37,10 +37,12 @@ PGN {
     
     OtherTag = Tag<symbol, string>
 
-    Rav = "(" FirstRound? Moves ")"
-    Move = san comment? Rav?
-    Round = moveNum Move Move
-    FirstRound = moveNum (Move | "...") Move
+    Rav = "(" Moves ")"
+    Move = san comment?
+    NormalRound = moveNum Move Move Rav?
+    RoundWhiteRav = moveNum Move Rav
+    RoundWhiteMissing = moveNum ".." Move
+    Round = NormalRound | RoundWhiteRav | RoundWhiteMissing
     LastRound = moveNum Move ~Move
     Moves = ListOf< ~LastRound Round, space*> LastRound?
 
