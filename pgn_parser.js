@@ -144,41 +144,45 @@ const semantics = g.createSemantics().addOperation('parse', {
     const content = str.parse();
     return [tag, content === '?' || content == '-' ? null : content];
   },
-  Rav(l, firstRound, moves, r) {
-    const firstRoundParsed = firstRound.parse();
+  Rav(l, moves, r) {
     const movesParsed = moves.parse();
-
-    if (firstRoundParsed.length > 0) {
-      movesParsed.splice(0, 0, firstRoundParsed[0]);
-    }
 
     return movesParsed;
   },
-  Move(san, comment, rav) {
+  Move(san, comment) {
     const sanParsed = san.parse();
+    if (sanParsed == "..") return null;
+
     const commentParsed = comment.parse();
-    const ravParsed = rav.parse();
 
     if (commentParsed.length > 0) sanParsed.comment = commentParsed[0];
-    if (ravParsed.length > 0) sanParsed.rav = ravParsed[0];
 
     return sanParsed;
   },
-  Round(moveNum, whiteMove, blackMove) {
-    return {
-      move: moveNum.parse(),
-      white: whiteMove.parse(),
-      black: blackMove.parse(),
-    };
-  },
-  FirstRound(moveNum, whiteMove, blackMove) {
+  NormalRound(moveNum, whiteMove, blackMove, rav) {
+    const move = moveNum.parse();
     const white = whiteMove.parse();
     const black = blackMove.parse();
+    const ravParsed = rav.parse();
+
+    if (ravParsed.length > 0) black.rav = ravParsed[0];
+
     return {
-      move: moveNum.parse(),
-      white: white === '...' ? null : white,
+      move,
+      white,
       black,
     };
+  },
+  RoundWhiteRav(moveNum, whiteMove, rav) {
+    const move = moveNum.parse();
+    const white = whiteMove.parse()
+    white.rav = rav.parse()[0];
+
+    return {
+      move,
+      white,
+      black: null,
+    }
   },
   LastRound(moveNum, whiteMove) {
     const white = whiteMove.parse();
