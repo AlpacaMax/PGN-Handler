@@ -196,6 +196,31 @@ const semantics = g.createSemantics().addOperation('parse', {
     const moves = list.asIteration().parse();
     lastSan = lastSan.parse();
     if (lastSan.length > 0) moves.push(lastSan[0]);
+
+    let i = 0;
+    let shift = 0;
+    while (i < moves.length - 1) {
+      if (
+        moves[i].moveNum == moves[i+1].moveNum &&
+        moves[i].black == null &&
+        moves[i+1].white == null
+      ) {
+        moves[i].black = moves[i+1].black;
+        shift += 1;
+        i += 2;
+      } else {
+        i++;
+      }
+
+      moves[i-shift] = moves[i];
+      // The reason we can do this is because objects are stored as references
+      // in the array
+    }
+
+    for (let i=0; i < shift; i++) {
+      moves.pop();
+    }
+
     return moves;
   },
   Game(header, moves, result) {
