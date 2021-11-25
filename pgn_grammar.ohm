@@ -42,7 +42,7 @@ PGN {
     NormalRound = moveNum Move Move Rav?
     RoundWhiteRav = moveNum Move Rav
     Round = NormalRound | RoundWhiteRav
-    LastRound = moveNum Move ~Move
+    LastRound = moveNum Move ~Move ~Rav
     Moves = ListOf< ~LastRound Round, space*> LastRound?
 
     string = "\"" ("\\\"" | ~"\"" any)* "\""
