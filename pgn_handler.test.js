@@ -103,3 +103,14 @@ test('Test result correction', () => {
   expect(win.header.result).toBe(results['1-0']);
   expect(incorrectResult.header.result).toBe(results['1/2-1/2']);
 });
+
+test('Test RAVs handling', () => {
+  const parsedPgn = parser.parseRaw(
+      'test_pgns/test_ravs.pgn',
+  );
+
+  expect(parsedPgn.moves[0].white.rav[0].white.san).toBe('d5');
+  expect(parsedPgn.moves[1].move).toBe(2);
+  expect(parsedPgn.moves[1].black.rav[0].black.san).toBe('Nf6');
+  expect(parsedPgn.moves[3].white.rav[0].white.san).toBe('b4');
+});

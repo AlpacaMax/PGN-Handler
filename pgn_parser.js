@@ -151,7 +151,7 @@ const semantics = g.createSemantics().addOperation('parse', {
   },
   Move(san, comment) {
     const sanParsed = san.parse();
-    if (sanParsed == "..") return null;
+    if (sanParsed == '..') return null;
 
     const commentParsed = comment.parse();
 
@@ -175,14 +175,14 @@ const semantics = g.createSemantics().addOperation('parse', {
   },
   RoundWhiteRav(moveNum, whiteMove, rav) {
     const move = moveNum.parse();
-    const white = whiteMove.parse()
-    white.rav = rav.parse()[0];
+    const white = whiteMove.parse();
+    white.rav = rav.parse();
 
     return {
       move,
       white,
       black: null,
-    }
+    };
   },
   LastRound(moveNum, whiteMove) {
     const white = whiteMove.parse();
