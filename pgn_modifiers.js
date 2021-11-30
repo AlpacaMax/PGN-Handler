@@ -1,7 +1,16 @@
 const {Chess} = require('chess.js');
 const {moveTypes} = require('./config');
 
+/**
+ * Take a object representation of a PGN file and add start position for
+ * each move
+ * @param {object} parsedPgn - The object representation of a PGN file
+ */
 function fillStartPosition(parsedPgn) {
+  /** Recursive helper function
+   * @param {array} moves - Moves extracted from parsedPgn
+   * @param {object} chess - The chess object created using chess.js
+   */
   function _helper(moves, chess) {
     const numOfHalfMoves = 0;
 
@@ -48,7 +57,16 @@ function fillStartPosition(parsedPgn) {
   _helper(parsedPgn.moves, chess);
 }
 
+/**
+ * Take an objct representation of a PGN file and add FEN code for the
+ * position after each move
+ * @param {object} parsedPgn - The object representation of a PGN file
+ */
 function fillFEN(parsedPgn) {
+  /** Recursive helper function
+   * @param {array} moves - Moves extracted form parsedPgn
+   * @param {object} chess - The chess object created using chess.js
+   */
   function _helper(moves, chess) {
     const numOfHalfMoves = 0;
 

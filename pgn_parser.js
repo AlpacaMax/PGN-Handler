@@ -67,10 +67,9 @@ const semantics = g.createSemantics().addOperation('parse', {
   },
   normalMove(piece, destSquare) {
     return {
-      // mate, check, promotion, long_castle, short_castle, takes, normal
       type: moveTypes.NORMAL,
       piece: piece.parse(),
-      from: {
+      from: { // This can be filled using fillStartPosition in pgn_modifiers.js
         file: null,
         rank: null,
       },
@@ -197,6 +196,7 @@ const semantics = g.createSemantics().addOperation('parse', {
     lastSan = lastSan.parse();
     if (lastSan.length > 0) moves.push(lastSan[0]);
 
+    // Here we merge the same moves into one
     let i = 0;
     let shift = 0;
     while (i < moves.length - 1) {
@@ -231,6 +231,11 @@ const semantics = g.createSemantics().addOperation('parse', {
   },
 });
 
+/**
+ * Read from a PGN file and parse it
+ * @param {string} filename - Filename of the PGN file
+ * @return {object} The object representation of the PGN file
+ */
 function parseRaw(filename) {
   const match = g.match(fs.readFileSync(filename));
   return semantics(match).parse();
