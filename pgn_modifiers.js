@@ -7,7 +7,8 @@ const {moveTypes} = require('./config');
  * @param {object} parsedPgn - The object representation of a PGN file
  */
 function fillStartPosition(parsedPgn) {
-  /** Recursive helper function
+  /**
+   * Recursive helper function
    * @param {array} moves - Moves extracted from parsedPgn
    * @param {object} chess - The chess object created using chess.js
    */
@@ -63,7 +64,8 @@ function fillStartPosition(parsedPgn) {
  * @param {object} parsedPgn - The object representation of a PGN file
  */
 function fillFEN(parsedPgn) {
-  /** Recursive helper function
+  /**
+   * Recursive helper function
    * @param {array} moves - Moves extracted form parsedPgn
    * @param {object} chess - The chess object created using chess.js
    */

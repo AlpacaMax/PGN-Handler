@@ -1,7 +1,17 @@
 const {Chess} = require('chess.js');
 const {results} = require('./config');
 
+/**
+ * Validate the moves in an object representation of parsedPgn
+ * @param {object} parsedPgn - The object representation of a PGN file
+ */
 function validate(parsedPgn) {
+  /**
+   * Recursive helper function
+   * @param {array} moves - Moves extracted from parsedPgn
+   * @param {object} chess - The chess object created using chess.js
+   * @return {string} The result of this variation of game
+   */
   function _helper(moves, chess) {
     let numOfHalfMoves = 0;
 
