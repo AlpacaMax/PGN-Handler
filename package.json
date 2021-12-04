@@ -1,6 +1,6 @@
 {
   "name": "pgn-handler",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "A PGN file handler with parser, validator, and modifier functions\"",
   "main": "pgn_parser.js",
   "scripts": {
@@ -10,7 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/AlpacaMax/PGN-Handler.git"
   },
-  "author": "AlpacaMax",
+  "author": "Tian(Maxwell) Yang (https://github.com/AlpacaMax)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/AlpacaMax/PGN-Handler/issues"
@@ -25,5 +25,9 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-import": "^2.25.2",
     "jest": "^27.3.1"
-  }
+  },
+  "bugs": {
+	"url": "https://github.com/AlpacaMax/PGN-Handler/issues"
+  },
+  "homepage": "https://github.com/AlpacaMax/PGN-Handler"
 }
