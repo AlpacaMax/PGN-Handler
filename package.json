@@ -2,7 +2,7 @@
   "name": "pgn-handler",
   "version": "0.1.0",
   "description": "A PGN file handler with parser, validator, and modifier functions\"",
-  "main": "pgn_parser.js",
+  "main": "pgn_handler.js",
   "scripts": {
     "test": "jest"
   },

@@ -1,8 +1,13 @@
 const fs = require('fs');
+const path = require('path');
 const ohm = require('ohm-js');
 const {moveTypes, results} = require('./config');
 
-const g = ohm.grammar(fs.readFileSync('pgn_grammar.ohm'));
+const ohmfile = path.resolve(
+  __dirname,
+  'pgn_grammar.ohm',
+)
+const g = ohm.grammar(fs.readFileSync(ohmfile));
 
 const semantics = g.createSemantics().addOperation('parse', {
   _terminal() {
